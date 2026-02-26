@@ -4,29 +4,141 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro - Gladiadores de Cristo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; padding: 20px; margin: 0;}
-        .container { max-width: 600px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-        h2 { text-align: center; color: #2c3e50; margin-bottom: 20px; }
-        label { font-weight: bold; display: block; margin-top: 15px; color: #333; }
-        input[type="text"], input[type="date"], select, textarea, input[type="file"] { width: 100%; padding: 10px; margin-top: 8px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; font-family: inherit;}
-        .radio-group { margin-top: 10px; }
-        .radio-group label { display: inline; font-weight: normal; margin-right: 15px; cursor: pointer; }
-        #producto-desc-container { display: none; background-color: #f9f9f9; padding: 15px; border-left: 4px solid #3498db; margin-top: 10px; border-radius: 4px; }
-        button { width: 100%; padding: 14px; background-color: #3498db; color: white; border: none; border-radius: 5px; margin-top: 25px; cursor: pointer; font-size: 16px; font-weight: bold; transition: background 0.3s; }
-        button:hover { background-color: #2980b9; }
-        button:disabled { background-color: #95a5a6; cursor: not-allowed; }
-        #mensaje { text-align: center; margin-top: 15px; font-weight: bold; padding: 10px; border-radius: 5px; }
-        .pregunta-larga { font-weight: 600; margin-top: 20px; color: #2c3e50; line-height: 1.4; }
+        :root {
+            --primary-gold: #B8860B; /* Color dorado del logo */
+            --primary-red: #8B0000;  /* Color rojo oscuro del logo */
+            --text-dark: #2c3e50;
+            --bg-light: #f4f7f6;
+        }
+        body { 
+            font-family: 'Roboto', sans-serif; 
+            background-color: var(--bg-light);
+            background-image: linear-gradient(to bottom, #1a1a1a 0%, var(--bg-light) 100%); /* Degradado sutil desde negro arriba */
+            padding: 20px; 
+            margin: 0;
+            color: var(--text-dark);
+        }
+        .container { 
+            max-width: 650px; 
+            margin: 30px auto; 
+            background: white; 
+            padding: 40px; 
+            border-radius: 15px; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
+            border-top: 5px solid var(--primary-gold);
+        }
+        .logo-container {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .logo-container img {
+            max-width: 200px;
+            height: auto;
+            /* Filtro sutil para darle un brillo dorado extra */
+            filter: drop-shadow(0 2px 4px rgba(184, 134, 11, 0.3));
+        }
+        h2 { 
+            text-align: center; 
+            color: var(--primary-gold); 
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            margin-bottom: 35px; 
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        label { 
+            font-weight: 500; 
+            display: block; 
+            margin-top: 20px; 
+            color: var(--text-dark);
+        }
+        input[type="text"], input[type="date"], input[type="number"], select, textarea, input[type="file"] { 
+            width: 100%; 
+            padding: 12px; 
+            margin-top: 8px; 
+            border: 1px solid #ccc; 
+            border-radius: 8px; 
+            box-sizing: border-box; 
+            font-family: inherit;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--primary-gold);
+            outline: none;
+        }
+        .radio-group { 
+            margin-top: 12px; 
+            display: flex;
+            gap: 20px;
+        }
+        .radio-group label { 
+            display: flex;
+            align-items: center;
+            font-weight: normal; 
+            margin: 0;
+            cursor: pointer; 
+        }
+        input[type="radio"] {
+            margin-right: 8px;
+            accent-color: var(--primary-gold); /* Color del puntito del radio */
+        }
+        .conditional-container { 
+            display: none; 
+            background-color: #fff8e1; /* Fondo dorado muy claro */
+            padding: 20px; 
+            border-left: 4px solid var(--primary-gold); 
+            margin-top: 15px; 
+            border-radius: 4px; 
+        }
+        button { 
+            width: 100%; 
+            padding: 15px; 
+            background: linear-gradient(to right, var(--primary-gold), #DAA520); /* Degradado dorado */
+            color: white; 
+            border: none; 
+            border-radius: 8px; 
+            margin-top: 35px; 
+            cursor: pointer; 
+            font-size: 18px; 
+            font-family: 'Cinzel', serif;
+            font-weight: bold; 
+            letter-spacing: 1px;
+            transition: transform 0.2s, box-shadow 0.2s; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        button:hover { 
+            transform: translateY(-2px);
+            box-shadow: 0 6px 10px rgba(0,0,0,0.15);
+        }
+        button:disabled { 
+            background: #bdc3c7; 
+            cursor: not-allowed; 
+            transform: none;
+            box-shadow: none;
+        }
+        #mensaje { 
+            text-align: center; 
+            margin-top: 20px; 
+            font-weight: bold; 
+            padding: 15px; 
+            border-radius: 8px; 
+        }
+        .pregunta-larga { font-weight: 500; margin-top: 25px; color: var(--text-dark); line-height: 1.5; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2>Registro Gladiadores de Cristo</h2>
+    <div class="logo-container">
+        <img src="logo_gladiadores.png" alt="Logo Gladiadores de Cristo" id="logo-img">
+    </div>
+    <h2>Ficha de Inscripción</h2>
     <form id="registroForm">
         <label for="nombre">Nombre completo:</label>
-        <input type="text" id="nombre" required>
+        <input type="text" id="nombre" required placeholder="Ej. Juan Pablo Pérez Cruz">
 
         <label for="fechaNacimiento">Fecha de nacimiento:</label>
         <input type="date" id="fechaNacimiento" required>
@@ -34,15 +146,27 @@
         <label for="estadoCivil">Estado civil:</label>
         <select id="estadoCivil" required>
             <option value="">Seleccione una opción</option>
-            <option value="Casado Civil">Casado Civil</option>
-            <option value="Casado Religioso">Casado Religioso</option>
-            <option value="Juntado">Juntado</option>
-            <option value="Divorciado">Divorciado</option>
             <option value="Soltero">Soltero</option>
+            <option value="Casado Civil">Casado solo por Civil</option>
+            <option value="Casado Civil y Religioso">Casado por lo Civil y Religioso</option>
+            <option value="Juntado/Unión Libre">Juntado / Unión Libre</option>
+            <option value="Divorciado">Divorciado</option>
+            <option value="Viudo">Viudo</option>
         </select>
 
+        <div class="pregunta-larga">¿Tiene hijos?</div>
+        <div class="radio-group">
+            <input type="radio" id="hijosSi" name="tieneHijos" value="Si" onchange="toggleHijosInput()"> <label for="hijosSi">Sí</label>
+            <input type="radio" id="hijosNo" name="tieneHijos" value="No" onchange="toggleHijosInput()" checked> <label for="hijosNo">No</label>
+        </div>
+
+        <div id="hijos-container" class="conditional-container">
+            <label for="cantidadHijos">¿Cuántos hijos tiene?</label>
+            <input type="number" id="cantidadHijos" min="1" placeholder="Ej. 2">
+        </div>
+
         <label for="profesion">Profesión, Oficio o Trabajo:</label>
-        <input type="text" id="profesion" required>
+        <input type="text" id="profesion" required placeholder="Ej. Abogado, Carpintero, Ventas...">
 
         <div class="pregunta-larga">¿Tiene algún producto o servicio que ofrece y desea que lo tengamos como referencia?</div>
         <div class="radio-group">
@@ -50,20 +174,30 @@
             <input type="radio" id="prodNo" name="tieneProducto" value="No" onchange="toggleProductoDesc()" checked> <label for="prodNo">No</label>
         </div>
 
-        <div id="producto-desc-container">
+        <div id="producto-desc-container" class="conditional-container">
             <label for="descripcionProducto">Describa su producto o servicio:</label>
-            <textarea id="descripcionProducto" rows="3"></textarea>
+            <textarea id="descripcionProducto" rows="3" placeholder="Ej. Hago tortas personalizadas, Servicio de plomería..."></textarea>
         </div>
 
-        <div class="pregunta-larga">Déjanos tu foto para felicitarte en tu cumpleaños:</div>
+        <div class="pregunta-larga">Déjanos tu foto (para felicitarte en tu cumpleaños):</div>
         <input type="file" id="foto" accept="image/*" required>
 
-        <button type="submit" id="btnSubmit">Enviar Registro</button>
+        <button type="submit" id="btnSubmit">ENVIAR INSCRIPCIÓN</button>
         <div id="mensaje"></div>
     </form>
 </div>
 
 <script>
+    // Lógica para mostrar/ocultar el campo de cantidad de hijos
+    function toggleHijosInput() {
+        const siRadio = document.getElementById('hijosSi').checked;
+        const contenedor = document.getElementById('hijos-container');
+        const inputCantidad = document.getElementById('cantidadHijos');
+        if(siRadio) { contenedor.style.display = 'block'; inputCantidad.required = true; } 
+        else { contenedor.style.display = 'none'; inputCantidad.required = false; inputCantidad.value = ""; }
+    }
+
+    // Lógica para mostrar/ocultar la descripción del producto
     function toggleProductoDesc() {
         const siRadio = document.getElementById('prodSi').checked;
         const contenedor = document.getElementById('producto-desc-container');
@@ -72,114 +206,152 @@
         else { contenedor.style.display = 'none'; textArea.required = false; textArea.value = ""; }
     }
 
-    // --- FUNCIÓN PARA DIBUJAR LA PLANILLA ---
-    function generarPlanillaImagen(datos, fotoBase64) {
+    // --- FUNCIÓN MEJORADA PARA DIBUJAR LA PLANILLA CON LOGO ---
+    function generarPlanillaImagen(datos, fotoBase64, logoImgElement) {
         return new Promise((resolve) => {
             const canvas = document.createElement('canvas');
             const ctx = canvas.getContext('2d');
-            canvas.width = 800;
-            canvas.height = 1100;
+            canvas.width = 900; // Un poco más ancha
+            canvas.height = 1300; // Más alta para acomodar todo
 
-            // Fondo blanco
-            ctx.fillStyle = '#ffffff';
+            // Fondo general
+            ctx.fillStyle = '#f4f7f6';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            // Cabecera azul
-            ctx.fillStyle = '#1a365d';
-            ctx.fillRect(0, 0, canvas.width, 100);
+            // Cabecera con degradado dorado/rojo
+            const gradient = ctx.createLinearGradient(0, 0, canvas.width, 0);
+            gradient.addColorStop(0, '#8B0000'); // Rojo
+            gradient.addColorStop(0.5, '#B8860B'); // Dorado
+            gradient.addColorStop(1, '#8B0000'); // Rojo
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, 180);
+
+            // Dibujar el logo en la cabecera
+            if (logoImgElement && logoImgElement.complete) {
+                const logoWidth = 150;
+                const logoHeight = logoImgElement.height * (logoWidth / logoImgElement.width);
+                // Centrar el logo horizontalmente
+                ctx.drawImage(logoImgElement, (canvas.width - logoWidth) / 2, 20, logoWidth, logoHeight);
+            }
             
-            // Título
-            ctx.fillStyle = '#ffffff';
-            ctx.font = 'bold 36px Arial';
+            // Título principal
+            ctx.fillStyle = '#FFFFFF';
+            ctx.font = 'bold 50px "Cinzel", serif'; // Usar la fuente del logo si es posible, sino serif
             ctx.textAlign = 'center';
-            ctx.fillText('GLADIADORES DE CRISTO', canvas.width / 2, 60);
+            ctx.shadowColor = "rgba(0,0,0,0.5)"; ctx.shadowBlur = 10; // Sombra para el texto
+            ctx.fillText('GLADIADORES DE CRISTO', canvas.width / 2, 140);
+            ctx.shadowBlur = 0; // Resetear sombra
 
             // Subtítulo
-            ctx.fillStyle = '#333333';
-            ctx.font = 'bold 24px Arial';
-            ctx.fillText('Ficha de Registro', canvas.width / 2, 150);
+            ctx.fillStyle = '#B8860B';
+            ctx.font = 'bold 32px Roboto, sans-serif';
+            ctx.fillText('FICHA DE REGISTRO OFICIAL', canvas.width / 2, 240);
+
+            // Fondo blanco para los datos
+            ctx.fillStyle = '#FFFFFF';
+            ctx.fillRect(50, 280, canvas.width - 100, canvas.height - 330);
+            ctx.strokeStyle = '#B8860B'; ctx.lineWidth = 3;
+            ctx.strokeRect(50, 280, canvas.width - 100, canvas.height - 330);
 
             // Dibujar los textos de los datos
             ctx.textAlign = 'left';
-            ctx.font = '22px Arial';
-            let y = 220;
-            const lineSpacing = 40;
+            let y = 350;
+            const lineSpacing = 50;
+            const leftMargin = 100;
 
             const lineas = [
-                { label: 'Nombre:', value: datos.nombre },
-                { label: 'Nacimiento:', value: datos.fechaNacimiento },
+                { label: 'Nombre Completo:', value: datos.nombre },
+                { label: 'Fecha de Nacimiento:', value: datos.fechaNacimiento },
                 { label: 'Estado Civil:', value: datos.estadoCivil },
-                { label: 'Profesión:', value: datos.profesion },
-                { label: '¿Ofrece Producto?:', value: datos.tieneProducto }
+                { label: 'Profesión/Oficio:', value: datos.profesion },
+                { label: '¿Tiene Hijos?:', value: datos.tieneHijos + (datos.tieneHijos === 'Si' ? ' (' + datos.cantidadHijos + ')' : '') },
+                { label: '¿Ofrece Producto/Servicio?:', value: datos.tieneProducto }
             ];
 
             if (datos.tieneProducto === 'Si') {
-                lineas.push({ label: 'Detalle del Producto:', value: datos.descripcionProducto });
+                lineas.push({ label: 'Descripción:', value: datos.descripcionProducto });
             }
 
             lineas.forEach(linea => {
-                ctx.font = 'bold 22px Arial';
-                ctx.fillText(linea.label, 80, y);
-                ctx.font = '22px Arial';
-                // Calculamos el espacio para que el valor empiece justo después de la etiqueta
-                const labelWidth = ctx.measureText(linea.label).width;
+                // Etiqueta dorada
+                ctx.fillStyle = '#B8860B';
+                ctx.font = 'bold 24px Roboto, sans-serif';
+                ctx.fillText(linea.label, leftMargin, y);
                 
-                // Si la descripción es muy larga, la acortamos visualmente para no romper la imagen
+                // Valor en color oscuro
+                ctx.fillStyle = '#2c3e50';
+                ctx.font = '24px Roboto, sans-serif';
                 let valor = linea.value;
-                if(valor.length > 45) valor = valor.substring(0, 45) + "...";
+                // Manejo básico de textos largos
+                if(valor.length > 40) valor = valor.substring(0, 37) + "...";
                 
-                ctx.fillText(valor, 80 + labelWidth + 10, y);
+                // Calcular posición del valor para que quede alineado
+                const labelWidth = ctx.measureText(linea.label).width;
+                ctx.fillText(valor, leftMargin + labelWidth + 15, y);
+                
+                // Línea separadora sutil
+                ctx.beginPath(); ctx.moveTo(leftMargin, y + 15); ctx.lineTo(canvas.width - leftMargin, y + 15);
+                ctx.strokeStyle = '#eee'; ctx.lineWidth = 1; ctx.stroke();
+
                 y += lineSpacing;
             });
 
             // Dibujar la foto de la persona en la parte inferior
             const img = new Image();
             img.onload = function() {
-                // Ajustar el tamaño de la imagen manteniendo proporciones
-                const maxImgWidth = 500;
-                const maxImgHeight = 500;
+                const maxImgSize = 500;
                 let finalWidth = img.width;
                 let finalHeight = img.height;
 
-                if (finalWidth > maxImgWidth) {
-                    finalHeight = finalHeight * (maxImgWidth / finalWidth);
-                    finalWidth = maxImgWidth;
-                }
-                if (finalHeight > maxImgHeight) {
-                    finalWidth = finalWidth * (maxImgHeight / finalHeight);
-                    finalHeight = maxImgHeight;
+                // Lógica para escalar la imagen sin deformarla
+                if (finalWidth > finalHeight) {
+                    if (finalWidth > maxImgSize) {
+                        finalHeight *= maxImgSize / finalWidth;
+                        finalWidth = maxImgSize;
+                    }
+                } else {
+                    if (finalHeight > maxImgSize) {
+                        finalWidth *= maxImgSize / finalHeight;
+                        finalHeight = maxImgSize;
+                    }
                 }
 
-                // Centrar la imagen
                 const x = (canvas.width - finalWidth) / 2;
-                y += 40; // Espacio extra antes de la foto
+                y += 30; // Espacio extra antes de la foto
                 
-                // Borde para la foto
-                ctx.strokeStyle = '#cccccc';
-                ctx.lineWidth = 5;
-                ctx.strokeRect(x - 5, y - 5, finalWidth + 10, finalHeight + 10);
+                // Marco dorado elegante para la foto
+                ctx.strokeStyle = '#B8860B';
+                ctx.lineWidth = 8;
+                ctx.strokeRect(x - 4, y - 4, finalWidth + 8, finalHeight + 8);
+                // Sombra para la foto
+                ctx.shadowColor = "rgba(0,0,0,0.3)"; ctx.shadowBlur = 20; ctx.shadowOffsetX = 5; ctx.shadowOffsetY = 5;
                 
-                // Pintar la foto
                 ctx.drawImage(img, x, y, finalWidth, finalHeight);
 
-                // Convertir todo el lienzo a Base64 (JPG)
-                resolve(canvas.toDataURL('image/jpeg', 0.9));
+                resolve(canvas.toDataURL('image/jpeg', 0.95));
+            };
+            // Manejo de error si la imagen no carga
+            img.onerror = function() {
+                // Si falla la imagen, resolver sin ella para no trabar el proceso
+                ctx.fillStyle = '#B8860B'; ctx.font = '20px Roboto'; ctx.textAlign = 'center';
+                ctx.fillText('(Error al cargar la foto)', canvas.width/2, y + 100);
+                resolve(canvas.toDataURL('image/jpeg', 0.95));
             };
             img.src = fotoBase64;
         });
     }
 
-    // Procesar el envío
+    // Procesar el envío del formulario
     document.getElementById('registroForm').addEventListener('submit', async function(e) {
         e.preventDefault(); 
         
         const btnSubmit = document.getElementById('btnSubmit');
         const mensaje = document.getElementById('mensaje');
+        const logoImg = document.getElementById('logo-img');
         
         btnSubmit.disabled = true;
-        btnSubmit.innerText = "Generando planilla y guardando...";
-        mensaje.innerText = "";
-        mensaje.style.backgroundColor = "transparent";
+        btnSubmit.innerHTML = "Procesando registro... <br><small>Esto puede tomar unos segundos</small>";
+        mensaje.style.display = "none";
 
         const fileInput = document.getElementById('foto');
         const file = fileInput.files[0];
@@ -188,54 +360,62 @@
         reader.onload = async function(event) {
             const fotoBase64Data = event.target.result;
 
+            // Recopilar datos, incluyendo los nuevos de hijos
             const payload = {
                 nombre: document.getElementById('nombre').value,
                 fechaNacimiento: document.getElementById('fechaNacimiento').value,
                 estadoCivil: document.getElementById('estadoCivil').value,
                 profesion: document.getElementById('profesion').value,
+                tieneHijos: document.querySelector('input[name="tieneHijos"]:checked').value,
+                cantidadHijos: document.getElementById('cantidadHijos').value,
                 tieneProducto: document.querySelector('input[name="tieneProducto"]:checked').value,
                 descripcionProducto: document.getElementById('descripcionProducto').value,
                 fotoBase64: fotoBase64Data,
                 fotoName: file.name
             };
 
-            // Llamamos a la función mágica para generar la imagen de la planilla
-            payload.planillaBase64 = await generarPlanillaImagen(payload, fotoBase64Data);
+            try {
+                // Generar la planilla pasando también el elemento del logo
+                payload.planillaBase64 = await generarPlanillaImagen(payload, fotoBase64Data, logoImg);
 
-            // =========================================================================
-            // ¡¡¡ ATENCIÓN !!! PEGA AQUÍ LA NUEVA URL DE GOOGLE APPS SCRIPT
-            // =========================================================================
-            const scriptURL = "https://script.google.com/macros/s/AKfycbz_jusLcRNNGbe16_0v0nQnvFPMUk7FO_mVhlY4B-qFKg3FZ4P26l07quHJpIJu5Z7O/exec"; 
+                // =========================================================================
+                // ¡¡¡ PEGA AQUÍ TU NUEVA URL DE GOOGLE APPS SCRIPT !!!
+                // =========================================================================
+                const scriptURL = "https://script.google.com/macros/s/AKfycbz-I31ZMX-Obe81nGB0SCXnD-s3oezMI6z_3ncgHYr9lSKpH7EYtlCWDi7toJgUspRpNA/exec"; 
 
-            fetch(scriptURL, {
-                method: 'POST',
-                body: JSON.stringify(payload),
-                headers: { 'Content-Type': 'text/plain;charset=utf-8' }
-            })
-            .then(response => response.json())
-            .then(data => {
+                const response = await fetch(scriptURL, {
+                    method: 'POST',
+                    body: JSON.stringify(payload),
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }
+                });
+                const data = await response.json();
+
                 if(data.status === "success") {
+                    mensaje.style.display = "block";
                     mensaje.style.color = "#155724";
                     mensaje.style.backgroundColor = "#d4edda";
-                    mensaje.innerText = "¡Registro y planilla generados con éxito!";
+                    mensaje.innerHTML = "✅ <b>¡Inscripción Exitosa!</b><br>Bienvenido a Gladiadores de Cristo.";
                     document.getElementById('registroForm').reset();
                     toggleProductoDesc(); 
+                    toggleHijosInput();
+                    window.scrollTo(0, 0); // Subir para ver el mensaje
                 } else {
                     throw new Error(data.message);
                 }
-            })
-            .catch(error => {
+            } catch (error) {
+                mensaje.style.display = "block";
                 mensaje.style.color = "#721c24";
                 mensaje.style.backgroundColor = "#f8d7da";
-                mensaje.innerText = "Hubo un error al enviar: " + error.message;
-            })
-            .finally(() => {
+                mensaje.innerText = "⚠️ Hubo un error al enviar: " + error.message + ". Por favor, inténtalo de nuevo.";
+            } finally {
                 btnSubmit.disabled = false;
-                btnSubmit.innerText = "Enviar Registro";
-            });
+                btnSubmit.innerText = "ENVIAR INSCRIPCIÓN";
+            }
         };
         
-        if(file) reader.readAsDataURL(file);
+        if(file) {
+            reader.readAsDataURL(file);
+        }
     });
 </script>
 
