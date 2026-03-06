@@ -53,7 +53,7 @@
             margin-top: 20px; 
             color: var(--text-dark);
         }
-        input[type="text"], input[type="date"], input[type="number"], select, textarea, input[type="file"] { 
+        input[type="text"], input[type="tel"], input[type="date"], input[type="number"], select, textarea, input[type="file"] { 
             width: 100%; 
             padding: 12px; 
             margin-top: 8px; 
@@ -137,11 +137,13 @@
     <h2>Ficha de Inscripción</h2>
     <form id="registroForm">
         <label for="nombre">Nombre completo:</label>
-        <input type="text" id="nombre" required placeholder="
-. Juan Pablo Pérez Cruz">
+        <input type="text" id="nombre" required placeholder="Ej. Juan Pablo Pérez Cruz">
 
         <label for="ci">Carnet de Identidad (CI):</label>
         <input type="text" id="ci" required placeholder="Ej. 1234567 SC">
+
+        <label for="telefono">Número de Teléfono (WhatsApp):</label>
+        <input type="tel" id="telefono" required placeholder="Ej. 70000000">
 
         <label for="nacionalidad">Nacionalidad / Lugar de origen:</label>
         <input type="text" id="nacionalidad" required placeholder="Ej. Boliviano, Santa Cruz">
@@ -221,7 +223,6 @@
         else { contenedor.style.display = 'none'; textArea.required = false; textArea.value = ""; }
     }
 
-    // NUEVO: Función para mostrar/ocultar el grupo de oración
     function toggleGrupoOracion() {
         const siRadio = document.getElementById('grupoSi').checked;
         const contenedor = document.getElementById('grupo-desc-container');
@@ -235,7 +236,7 @@
             const canvas = document.createElement('canvas');
             const ctx = canvas.getContext('2d');
             canvas.width = 900; 
-            canvas.height = 1500; // Aumentado para que entren las nuevas preguntas
+            canvas.height = 1500; 
 
             ctx.fillStyle = '#f4f7f6';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -274,7 +275,6 @@
             const lineSpacing = 50;
             const leftMargin = 100;
 
-            // Lista actualizada con los nuevos campos
             const lineas = [
                 { label: 'Nombre Completo:', value: datos.nombre },
                 { label: 'C.I.:', value: datos.ci },
@@ -290,6 +290,9 @@
             if (datos.tieneProducto === 'Si') {
                 lineas.push({ label: 'Descripción:', value: datos.descripcionProducto });
             }
+            
+            // EL TELÉFONO ABAJO DEL TODO EN LA IMAGEN, COMO PEDISTE
+            lineas.push({ label: 'Teléfono:', value: datos.telefono });
 
             lineas.forEach(linea => {
                 ctx.fillStyle = '#B8860B';
@@ -312,7 +315,7 @@
 
             const img = new Image();
             img.onload = function() {
-                const maxImgSize = 450; // Reducido un poco para dar más espacio a las letras
+                const maxImgSize = 450; 
                 let finalWidth = img.width;
                 let finalHeight = img.height;
 
@@ -367,10 +370,10 @@
         reader.onload = async function(event) {
             const fotoBase64Data = event.target.result;
 
-            // NUEVO: Payload actualizado con ci, nacionalidad, tieneGrupo y nombreGrupo
             const payload = {
                 nombre: document.getElementById('nombre').value,
                 ci: document.getElementById('ci').value,
+                telefono: document.getElementById('telefono').value, // <--- EL DATO DEL TELÉFONO VIAJA AQUÍ
                 nacionalidad: document.getElementById('nacionalidad').value,
                 fechaNacimiento: document.getElementById('fechaNacimiento').value,
                 estadoCivil: document.getElementById('estadoCivil').value,
@@ -388,6 +391,7 @@
             try {
                 payload.planillaBase64 = await generarPlanillaImagen(payload, fotoBase64Data, logoImg);
 
+                // IMPORTANTE: Asegúrate de que esta URL sea la correcta de tu script
                 const scriptURL = "https://script.google.com/macros/s/AKfycbws3mCGh_H7h1Kg8PZbS6u7Y0njNIFXXvJp9IjmIWq-GUlRC_MvA1s3496tvCV93rKCZQ/exec"; 
 
                 const response = await fetch(scriptURL, {
@@ -405,7 +409,7 @@
                     document.getElementById('registroForm').reset();
                     toggleProductoDesc(); 
                     toggleHijosInput();
-                    toggleGrupoOracion(); // Resetear también esta opción
+                    toggleGrupoOracion(); 
                     window.scrollTo(0, 0); 
                 } else {
                     throw new Error(data.message);
